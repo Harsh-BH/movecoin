@@ -68,11 +68,11 @@
     "date-fns": "^4.1.0",
     "eslint-config-next": "15.1.0",
     "framer-motion": "^12.5.0",
+    "groq-sdk": "^0.17.0",
     "kbar": "^0.1.0-beta.45",
     "keyv": "^5.3.2",
     "lucide-react": "^0.476.0",
     "match-sorter": "^8.0.0",
-   
     "motion": "^11.17.0",
     "move-agent-kit": "^0.2.0",
     "next": "15.1.0",
