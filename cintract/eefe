@@ -1,0 +1,38 @@
+import { AptosClient, AptosAccount, FaucetClient, Types } from "aptos";
+
+// Initialize Aptos client
+const client = new AptosClient('https://fullnode.devnet.aptoslabs.com/v1');
+
+// Play a game
+async function playGame(playerAccount, gameId) {
+  const payload = {
+    type: "entry_function_payload",
+    function: "movecoin_games::game_platform::play_game",
+    type_arguments: [],
+    arguments: [gameId]
+  };
+  
+  const txnRequest = await client.generateTransaction(playerAccount.address(), payload);
+  const signedTxn = await client.signTransaction(playerAccount, txnRequest);
+  const transactionRes = await client.submitTransaction(signedTxn);
+  
+  await client.waitForTransaction(transactionRes.hash);
+  console.log('Game session started!');
+}
+
+// Submit score after gameplay
+async function submitScore(playerAccount, gameId, score) {
+  const payload = {
+    type: "entry_function_payload",
+    function: "movecoin_games::game_platform::submit_score",
+    type_arguments: [],
+    arguments: [gameId, score]
+  };
+  
+  const txnRequest = await client.generateTransaction(playerAccount.address(), payload);
+  const signedTxn = await client.signTransaction(playerAccount, txnRequest);
+  const transactionRes = await client.submitTransaction(signedTxn);
+  
+  await client.waitForTransaction(transactionRes.hash);
+  console.log('Score submitted!');
+}
